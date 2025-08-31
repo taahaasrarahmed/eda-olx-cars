@@ -1,76 +1,98 @@
 # 🚗 OLX Cars EDA (Pakistan)
 
-Exploratory data analysis of used-car listings from OLX Pakistan.  
-We study how **price** varies with **mileage, model year, brand, transmission, and location**, and fit a simple baseline model.
+Exploratory data analysis of used-car listings from **OLX Pakistan**.  
+We examine how **price** varies with **mileage, model year, brand, transmission, and city**, estimate a **break-even mileage** where price drops steepen, and fit a baseline **Random Forest** model.
 
 ---
 
-## 🔎 Highlights (your results)
+## 🔎 Executive Summary
 
-- **Price spread:** wide; mean pulled up by high-end tail (see boxplot & brand means).
-- **Mileage effect:** clear negative trend; stronger in Honda/Toyota than Suzuki/Hyundai/Mitsubishi.
-- **Year (age):** strongest driver; newer models command a steep premium.
-- **City gap:** Lahore prices generally above Karachi across mileage bins; gap narrows at very high mileage.
-- **Break-even mileage (piecewise slope change):** **≈ 17,161 km**.
-- **Baseline model (Random Forest):** **R² = 0.951**, **MAPE = 9.64%** ✅ (<10%).
+- **Price spread:** wide and right-skewed; mean > median due to high-end tail.  
+- **Mileage effect:** clear negative trend; strongest for **Honda/Toyota**, weaker for smaller brands.  
+- **Model year (age):** the **strongest** single driver; newer cars command a steep premium.  
+- **City gap:** **Lahore > Karachi** across most mileage bins; gap narrows at very high mileage.  
+- **Break-even mileage (slope change):** **≈ 17,161 km** (piecewise linear regression).  
+- **Baseline model:** **R² = 0.9507**, **MAPE = 9.64%** ✅ (<10%).
+
+---
+
+## 🧭 Approach
+
+**Data & Cleaning**
+- Loaded raw OLX listings; kept `price`, `model_year`, `kms_driven`, `make`, `model`, `transmission`, `city`, `assembly`.
+- Removed obvious errors/duplicates and trimmed extreme price outliers (to keep distribution interpretable).
+
+**EDA**
+- Distribution: boxplot + brand means to understand spread and mix.
+- Relationships:
+  - **Price ~ Mileage** (scatter/LOWESS, by brand & transmission).
+  - **Price ~ Year** (overall + brand panels).
+  - **City** differences across **mileage bins** (Karachi vs Lahore).
+
+**Break-even mileage**
+- Fit a **two-segment linear model** on `price ~ mileage` using grid-searched breakpoints (10–90th percentiles) and chose minimum SSE.
+- Interpretation: the post-breakpoint slope is markedly more negative → price declines faster beyond this mileage.
+
+**Modeling**
+- Encoded categoricals, trained **Random Forest Regressor** on held-out data; reported **R²** and **MAPE**.
 
 ---
 
 ## 📊 Key Questions & Figures
 
 ### 1) What does the overall price distribution look like?
-- Boxplot shows median around ~1.8M PKR with long right tail.
-- Top-10 makes by mean price confirm brand mix (Mercedes/Toyota/Honda higher tier).
-  
+- Median around ~1.8M PKR with a long right tail.  
+- Brand mix shows premium tiers (Mercedes/Toyota/Honda higher).
+
 ![Boxplot of prices](reports/01/boxplot_prices.png)
 ![Top makes by average price](reports/01/price_brands.png)
 
 ---
 
 ### 2) How does mileage impact price?
-- Brand-wise scatter makes the downward slope visible; strongest for Honda/Toyota.
-- Transmission split: automatics list higher on average; both show price drop with mileage.
-  
+- Downward slope visible; steeper for Honda/Toyota than Suzuki/Hyundai/Mitsubishi.  
+- Automatics list higher on average; both transmissions decline with mileage.
+
 ![Mileage vs price by brand](reports/02/mileage_price.png)
 ![Mileage vs price by transmission](reports/02/mileage_price_transmission.png)
 
-**Break-even mileage:** using piecewise linear regression, the slope steepens after **≈ 17,161 km**, i.e., price declines faster beyond this point.  
-(Notebook: `notebooks/06_break_even_mileage.ipynb`)
+**Break-even mileage:** **≈ 17,161 km** — beyond this point, the fitted slope becomes more negative (price declines faster).  
 
 ---
 
 ### 3) Is there a city effect (Karachi vs Lahore) across mileage?
-- Lahore > Karachi across most mileage bins; the gap diminishes at very high mileage.
-  
+- Lahore tends to price higher than Karachi across bins; difference shrinks at very high mileage.
+
 ![City comparison over mileage bins](reports/03/mileage_price_location.png)
 
 ---
 
 ### 4) How does model year affect price?
-- Newer model years command much higher prices; year is the strongest single driver.
-- Brand-wise panels show similar shape with different levels.
-  
+- Newer models command substantially higher prices; strongest single driver overall.  
+- Brand panels show similar shape with different levels.
+
 ![Price vs model year (overall)](reports/04/year_price.png)
 ![Price vs model year by brand](reports/04/year_price_model.png)
 
 ---
 
 ### 5) Which features matter most?
-- Correlations: **Year (+)** strongest; **Mileage (−)** moderate; **Transmission (−)** shows price tiering effects.
-- Brand-wise correlations echo the pattern (Honda/Toyota show stronger |corr| with year/mileage).
-  
+- Correlations: **Year (+)** strongest; **Mileage (−)** moderate; **Transmission (−)** indicates price tiering.  
+- Brand-wise correlations echo the pattern (Honda/Toyota stronger |corr| with year/mileage).
+
 ![Correlation with price (overall)](reports/05/feature_selection.png)
 ![Correlation with price by brand](reports/05/feature_selection_model.png)
 
 ---
 
 ### 6) Can we predict price reasonably well?
-- **Random Forest** baseline on held-out data:  
-  - **R²:** `0.9506742203449255`  
-  - **MAPE:** `0.09638845487934829` (**9.64%**) ✅
+**Random Forest** on held-out data:
+- **R²:** `0.9506742203449255`  
+- **MAPE:** `0.09638845487934829` (**9.64%**) ✅
 
-(Notebook: `07_notebooks/price_pred_randFor.ipynb`)
+Notebook: `notebooks/price_pred_randFor.ipynb`
 
 ---
 
+## 🗂️ Project Structure
 
