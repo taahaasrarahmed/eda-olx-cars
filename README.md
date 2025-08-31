@@ -50,8 +50,8 @@ We examine how **price** varies with **mileage, model year, brand, transmission,
 ---
 
 ### 2) How does mileage impact price?
-- Downward slope visible; steeper for Honda/Toyota than Suzuki/Hyundai/Mitsubishi.  
-- Automatics list higher on average; both transmissions decline with mileage.
+- Negative relationship overall; slope strength varies by brand.  
+- Transmission split shows a **level shift** (automatics higher) but **both** types depreciate with mileage.
 
 ![Mileage vs price by brand](reports/02/mileage_price.png)
 ![Mileage vs price by transmission](reports/02/mileage_price_transmission.png)
@@ -78,7 +78,7 @@ We examine how **price** varies with **mileage, model year, brand, transmission,
 
 ### 5) Which features matter most?
 - Correlations: **Year (+)** strongest; **Mileage (−)** moderate; **Transmission (−)** indicates price tiering.  
-- Brand-wise correlations echo the pattern (Honda/Toyota stronger |corr| with year/mileage).
+- Brand-wise correlations echo the pattern (Honda/Toyota stronger correlation with year/mileage).
 
 ![Correlation with price (overall)](reports/05/feature_selection.png)
 ![Correlation with price by brand](reports/05/feature_selection_model.png)
