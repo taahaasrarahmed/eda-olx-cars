@@ -23,7 +23,7 @@ We study how **price** varies with **mileage, model year, brand, transmission, a
 - Top-10 makes by mean price confirm brand mix (Mercedes/Toyota/Honda higher tier).
   
 ![Boxplot of prices](reports/01/boxplot_prices.png)
-![Top makes by average price](01/figures/price_brands.png)
+![Top makes by average price](reports/01/price_brands.png)
 
 ---
 
@@ -35,23 +35,23 @@ We study how **price** varies with **mileage, model year, brand, transmission, a
 ![Mileage vs price by transmission](reports/02/mileage_price_transmission.png)
 
 **Break-even mileage:** using piecewise linear regression, the slope steepens after **≈ 17,161 km**, i.e., price declines faster beyond this point.  
-(Notebook: `notebooks/break_even_mileage.ipynb`)
+(Notebook: `notebooks/06_break_even_mileage.ipynb`)
 
 ---
 
-### 3) How does model year affect price?
+### 3) Is there a city effect (Karachi vs Lahore) across mileage?
+- Lahore > Karachi across most mileage bins; the gap diminishes at very high mileage.
+  
+![City comparison over mileage bins](reports/04/mileage_price_location.png)
+
+---
+
+### 4) How does model year affect price?
 - Newer model years command much higher prices; year is the strongest single driver.
 - Brand-wise panels show similar shape with different levels.
   
 ![Price vs model year (overall)](reports/03/year_price.png)
 ![Price vs model year by brand](reports/03/year_price_model.png)
-
----
-
-### 4) Is there a city effect (Karachi vs Lahore) across mileage?
-- Lahore > Karachi across most mileage bins; the gap diminishes at very high mileage.
-  
-![City comparison over mileage bins](reports/04/mileage_price_location.png)
 
 ---
 
@@ -69,9 +69,8 @@ We study how **price** varies with **mileage, model year, brand, transmission, a
   - **R²:** `0.9506742203449255`  
   - **MAPE:** `0.09638845487934829` (**9.64%**) ✅
 
-(Notebook: `notebooks/price_pred_randFor.ipynb`)
+(Notebook: `07_notebooks/price_pred_randFor.ipynb`)
 
 ---
 
-## 🗂️ Project Structure
 
