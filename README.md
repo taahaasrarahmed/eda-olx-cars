@@ -90,9 +90,20 @@ We examine how **price** varies with **mileage, model year, brand, transmission,
 - **R²:** `0.9506742203449255`  
 - **MAPE:** `0.09638845487934829` (**9.64%**) ✅
 
-Notebook: `notebooks/price_pred_randFor.ipynb`
+Notebook: `06_notebooks/price_pred_randFor.ipynb`
 
 ---
 
-## 🗂️ Project Structure
+### ▶️ How to Run
+### 1) Install dependencies  
+Run this **from the repo root** (the folder with `README.md` and `requirements.txt`):
+```bash
+pip install -r requirements.txt
+# or
+python -m pip install -r requirements.txt
+# Windows alternative
+py -m pip install -r requirements.txt
+```
+### 2) Run the notebook files in order
+Run the notebook files after downloading the repository in the same format
 
