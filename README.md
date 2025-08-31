@@ -42,7 +42,7 @@ We study how **price** varies with **mileage, model year, brand, transmission, a
 ### 3) Is there a city effect (Karachi vs Lahore) across mileage?
 - Lahore > Karachi across most mileage bins; the gap diminishes at very high mileage.
   
-![City comparison over mileage bins](reports/04/mileage_price_location.png)
+![City comparison over mileage bins](reports/03/mileage_price_location.png)
 
 ---
 
@@ -50,8 +50,8 @@ We study how **price** varies with **mileage, model year, brand, transmission, a
 - Newer model years command much higher prices; year is the strongest single driver.
 - Brand-wise panels show similar shape with different levels.
   
-![Price vs model year (overall)](reports/03/year_price.png)
-![Price vs model year by brand](reports/03/year_price_model.png)
+![Price vs model year (overall)](reports/04/year_price.png)
+![Price vs model year by brand](reports/04/year_price_model.png)
 
 ---
 
